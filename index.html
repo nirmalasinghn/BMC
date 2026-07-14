@@ -61,26 +61,34 @@
     .mobile-menu a:hover { color:var(--accent); }
     .mobile-menu-footer { font-size:0.65rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); font-weight:400; }
 
-    
-    .hero { 
-  position: relative; 
-  height: 100dvh; 
-  min-height: 640px; 
-  display: flex; 
-  align-items: flex-end; 
-  overflow: hidden; 
-  width: 100%; 
+
+    .hero {
+  position: relative;
+  height: 100dvh;
+  min-height: 640px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  width: 100%;
 }
-    .hero-bg { 
-  position: absolute; 
-  inset: 0; 
-  background-size: cover; 
+    .hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center 30% !important; 
+  background-position: center 30% !important;
   animation: none;
-  width: 100%; 
-  filter: brightness(0.70) saturate(0.8); 
+  width: 100%;
+  filter: brightness(0.70) saturate(0.8);
   z-index: 1;
+}
+  .hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 2;
 }
     @keyframes zoomBg { from{transform:scale(1.06)} to{transform:scale(1)} }
     .hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(12,12,10,0.0) 0%,rgba(12,12,10,0.2) 40%,rgba(12,12,10,1.0) 100%); }
@@ -221,57 +229,79 @@
     .iti-card-key { background:rgba(201,75,30,.06); border-left:2px solid var(--accent); }
     .iti-card-key .day-num { color:var(--accent); }
 
+    .iti-status {
+  display: inline-block;
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.75rem;
+  border-radius: 100px;
+  margin-top: 0.5rem;
+  white-space: nowrap;
+}
+.iti-status.done {
+  background: rgba(122,138,90,0.1);
+  color: #9fb377;
+  border: 1px solid rgba(122,138,90,0.25);
+}
+.iti-status.highlight {
+  background: rgba(201,75,30,0.12);
+  color: var(--accent-lt);
+  border: 1px solid rgba(201,75,30,0.3);
+}
+
     .add-photos { padding:6rem 0; }
     .add-photos .container { padding-top:0; padding-bottom:0; }
     .hint { font-size:.82rem; color:var(--muted); margin-bottom:3rem; }
     .photo-slots { display:grid; grid-template-columns:repeat(4,1fr); gap:3px; }
     .photo-slot { aspect-ratio:16/9; overflow:hidden; margin:0; background:var(--card); cursor:pointer; display:block; }
     .photo-slot:hover img { transform:scale(1.04); filter:brightness(.9) saturate(1); }
-    .photo-slot img { 
-  width:100%; height:100%; object-fit:cover; object-position:center; display:block; 
-  filter:brightness(1) saturate(1); 
-  transition:transform .8s cubic-bezier(.16,1,.3,1),filter .4s; 
+    .photo-slot img {
+  width:100%; height:100%; object-fit:cover; object-position:center; display:block;
+  filter:brightness(1) saturate(1);
+  transition:transform .8s cubic-bezier(.16,1,.3,1),filter .4s;
 }
     .lb-wrap { display:none; position:fixed; inset:0; z-index:8000; background:rgba(0,0,0,0.96); flex-direction:column; align-items:center; justify-content:center; margin:0; border:none; border-radius:0; }
     .lb-wrap.open { display:flex; }
-    .lb-top { 
-  position:absolute; top:0; left:0; right:0; z-index:2; 
-  display:flex; justify-content:space-between; align-items:center; 
-  padding:1.2rem 1.8rem; 
-  background:linear-gradient(to bottom,rgba(0,0,0,0.75),transparent); 
+    .lb-top {
+  position:absolute; top:0; left:0; right:0; z-index:2;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1.2rem 1.8rem;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.75),transparent);
 }
-.lb-caption { 
-  color:rgba(255,255,255,.55); 
-  font-size:.82rem; 
-  margin:0 0 .7rem; 
-  font-style:italic; 
-  line-height:1.6; 
-  text-align:left; 
+.lb-caption {
+  color:rgba(255,255,255,.55);
+  font-size:.82rem;
+  margin:0 0 .7rem;
+  font-style:italic;
+  line-height:1.6;
+  text-align:left;
 }
     .lb-counter { font-size:11px; font-weight:500; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; }
     .lb-close { background:none; border:none; color:var(--muted); font-size:20px; cursor:pointer; line-height:1; }
     .lb-close:hover { color:var(--accent); }
     .lb-img-area { position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:0; overflow:hidden; }
-    .lb-img-area img { 
-  max-width:100%; 
-  max-height: calc(100vh - 130px); 
-  width:auto; 
-  height:auto; 
-  object-fit:contain; 
-  display:block; 
-  transition:opacity .4s; 
-  position:relative; 
-  z-index:1; 
+    .lb-img-area img {
+  max-width:100%;
+  max-height: calc(100vh - 130px);
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  display:block;
+  transition:opacity .4s;
+  position:relative;
+  z-index:1;
 }
     .lb-arrow { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.07); border:none; color:var(--text); font-size:20px; padding:10px 14px; cursor:pointer; border-radius:2px; transition:background .2s; }
     .lb-arrow:hover { background:var(--accent); }
     .lb-arrow.left { left:8px; }
     .lb-arrow.right { right:8px; }
-    .lb-bottom { 
-  position:absolute; 
-  bottom:0; left:0; right:0; 
-  padding:.8rem 1.5rem 1.2rem; 
-  background:rgba(0,0,0,0.75); 
+    .lb-bottom {
+  position:absolute;
+  bottom:0; left:0; right:0;
+  padding:.8rem 1.5rem 1.2rem;
+  background:rgba(0,0,0,0.75);
 }
     .lb-dots { display:flex; gap:6px; }
     .lb-dot { width:6px; height:6px; border-radius:0; background:rgba(255,255,255,.1); cursor:pointer; border:none; padding:0; transition:background .2s; }
@@ -282,7 +312,7 @@
     .closing-quote-label { font-size:.62rem; font-weight:500; letter-spacing:.25em; text-transform:uppercase; color:var(--muted); }
 
     .author-section { background:var(--deep); padding:6rem 0; border-top:1px solid var(--rule); }
-    .author-inner { display:grid; grid-template-columns:320px 1fr; gap:5rem; align-items:start; }
+    .author-inner { display:grid; grid-template-columns:320px 1fr; gap:2.8rem; align-items:start; }
     .author-photo { position:relative; height:340px;  width: 100%; overflow:hidden; }
     .author-photo img { width:100%; height:100%; object-fit:cover; object-position:center 25%; display:block; filter:brightness(1) saturate(1); }
     .author-photo::after { content:''; position:absolute; inset:0; border:1px solid rgba(201,75,30,0.25); pointer-events:none; }
@@ -294,7 +324,7 @@
     .trek-tag { font-size:.7rem; font-weight:400; letter-spacing:.06em; padding:.3em 1em; border:1px solid rgba(240,237,230,.12); color:var(--frost); text-transform:uppercase; }
     .trek-tag.current { background:rgba(201,75,30,.12); border-color:var(--accent); color:var(--accent-lt); }
     .future-tag { border-style:dashed; color:var(--muted); }
-
+    .author-text p { margin-bottom: 0.8rem; line-height: 1.55; }
     footer { border-top:3px solid var(--accent); padding:2.5rem 3.5rem 3rem; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1rem; }
     .footer-brand { font-family:var(--font-display); font-size:2rem; letter-spacing:0.1em; color:var(--text); text-transform:uppercase; }
     footer p { font-size:.76rem; color:var(--muted); margin:0; }
@@ -329,8 +359,10 @@
       .hero-title { font-size:clamp(4rem,20vw,7rem); }
       .stats-bar { grid-template-columns:1fr; }
       .stat-item:nth-child(odd) { border-right:none; }
-      .lb-img-area { min-height:240px; }
-      .lb-img-area img { max-height:240px; }
+      .lb-img-area { min-height:60vh; }
+      .lb-img-area img { max-height: calc(100vh - 110px); }
+      .lb-top { padding: 0.9rem 1.2rem; }
+      .lb-bottom { padding: 0.6rem 1.2rem 0.9rem; }
     }
     .insta-block { padding:5rem 0; text-align:center; border-top:1px solid var(--rule); }
     .insta-block p { max-width:480px; margin:0 auto 2.2rem; }
@@ -471,6 +503,56 @@ body.intro-active { overflow: hidden; }
     max-width: 100%;
   }
 }
+img {
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+.faq-section { margin: 3rem 0; }
+.faq-item {
+  border-bottom: 1px solid var(--rule);
+}
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text);
+}
+.faq-question:hover { color: var(--accent-lt); }
+.faq-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--accent);
+  transition: transform 0.3s ease;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.faq-answer p {
+  font-size: 0.88rem;
+  color: rgba(240,237,230,.62);
+  line-height: 1.8;
+  padding-bottom: 1.4rem;
+  margin-bottom: 0;
+}
 @keyframes fogMove { from { transform: translateX(0); } to { transform: translateX(-120px); } }
     @media (max-width: 480px) { .back-to-top { bottom: 1.4rem; right: 1.2rem; font-size: 0.55rem; padding: 0.5rem 0.85rem; } }
   </style>
@@ -496,13 +578,15 @@ body.intro-active { overflow: hidden; }
   <span class="btt-arrow">↑</span> Climb back up
 </button>
 
-<div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div> 
+<div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
 <nav id="nav">
   <a href="#" class="nav-brand">SHE EXPLORES</a>
   <ul class="nav-links">
     <li><a href="#story">The Story</a></li>
     <li><a href="#course">The Course</a></li>
     <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#nim-info">NIM Info</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#author">About</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
@@ -515,6 +599,8 @@ body.intro-active { overflow: hidden; }
     <li><a href="#story" class="mobile-nav-link">The Story</a></li>
     <li><a href="#course" class="mobile-nav-link">The Course</a></li>
     <li><a href="#gallery" class="mobile-nav-link">Gallery</a></li>
+    <li><a href="#nim-info" class="mobile-nav-link">NIM Info</a></li>
+    <li><a href="#faq" class="mobile-nav-link">FAQ</a></li>
     <li><a href="#author" class="mobile-nav-link">About</a></li>
   </ul>
   <p class="mobile-menu-footer">BMC 293 Ladies Batch · NIM Uttarkashi · June 2026</p>
@@ -616,13 +702,13 @@ body.intro-active { overflow: hidden; }
         <p>The course costs ₹27,286 for 28 days — stay, three meals a day, equipment, and all training included. The government subsidises it to keep mountaineering accessible in India. Application is smooth with a step-by-step process on the NIM portal. The medical certificate must carry valid information and be signed by an authorised medical officer with seal and signature. Don't cut corners on that.</p>
       </div>
       <p style="text-align:center; margin-top:2rem; font-size:.82rem; color:var(--muted);">
-  Apply at 
-  <a href="https://www.nimindia.net" target="_blank" 
+  Apply at
+  <a href="https://www.nimindia.net" target="_blank"
   style="color:var(--accent-lt);">nimindia.net</a>
 </p>
     </div>
   </div>
-  
+
   <!-- PHASE 03 - THE INSTITUTE -->
   <div class="container reveal">
     <div class="phase-header">
@@ -992,7 +1078,131 @@ body.intro-active { overflow: hidden; }
     <p>There are places on this earth that people see in photographs and think <em>that can't be real.</em> It is real. Green mountains, yellow buttercup fields, snow peaks that have no business being that white, a sharp mountain at 18,600 feet called DKD2 that you can look at with loving eyes. I have been there. I carry it with me now.</p>
     <p>Something inside me has changed. I am still understanding what. I suspect I always will be.</p>
   </div>
+  <!-- NIM INFO -->
+  <div class="surface-section" id="nim-info">
+  <div class="container reveal">
+    <div class="phase-header">
+      <div class="phase-label" style="margin-bottom:.6rem;">For Those Who Want to Go</div>
+      <div class="phase-name" style="font-size:clamp(1.8rem,4.5vw,2.8rem);">NIM Uttarkashi — The Details</div>
+      <div class="phase-sub">Official information, straight from the source</div>
+    </div>
 
+    <p>If this made you want to go — good. Here is everything you need to actually apply, with no guesswork.</p>
+
+    <div class="summit-grid">
+      <div class="summit-cell">
+        <span class="summit-cell-label">Address</span>
+        <span class="summit-cell-note" style="font-size:.85rem;color:var(--frost);">Nehru Institute of Mountaineering, Uttarkashi – 249193, Uttarakhand, India</span>
+      </div>
+      <div class="summit-cell">
+        <span class="summit-cell-label">Apply Online</span>
+        <span class="summit-cell-note" style="font-size:.85rem;"><a href="https://www.nimindia.net/applyonline" target="_blank" style="color:var(--accent-lt);">nimindia.net/applyonline →</a></span>
+      </div>
+      <div class="summit-cell">
+        <span class="summit-cell-label">Training Enquiries</span>
+        <span class="summit-cell-note" style="font-size:.85rem;">7060 717 717 · nimutk2004@gmail.com</span>
+      </div>
+      <div class="summit-cell">
+        <span class="summit-cell-label">Registrar's Office</span>
+        <span class="summit-cell-note" style="font-size:.85rem;">01374-222123</span>
+      </div>
+    </div>
+
+    <div class="note-block">
+      <p>Applications, medical forms, and the full training calendar are on the official NIM website — always check there directly for current batch dates and fees, since these are set by the institute and can change year to year.</p>
+    </div>
+
+    <p style="text-align:center;margin-top:2rem;">
+      <a href="https://www.nimindia.net" target="_blank" style="color:var(--accent-lt);font-family:var(--font-display);font-size:1.3rem;letter-spacing:0.05em;text-transform:uppercase;">Visit nimindia.net →</a>
+    </p>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="container reveal" id="faq">
+  <div class="phase-header">
+  <div class="phase-label" style="margin-bottom:.6rem;">For Anyone Considering This</div>
+  <div class="phase-name" style="font-size:clamp(1.8rem,4.5vw,2.8rem);">Questions Worth Asking Before You Go</div>
+  <div class="phase-sub">The things I wish someone had told me plainly, before I went</div>
+</div>
+
+  <div class="faq-section">
+
+    <div class="faq-item">
+      <button class="faq-question">How fit do I actually need to be before I go?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Fitter than "active." Running, yoga, or gym a few times a week is a good base, but the thing that actually matters is training with a loaded rucksack — at least 15–20 kg — on uneven terrain, not flat pavement. I trained with 5 kg and it wasn't enough; the gap between "fit" and "fit for this" is bigger than it looks from the outside.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">What's the age limit and eligibility?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Eligibility criteria (age, medical requirements) are set directly by NIM and can be updated year to year, so I'd rather send you to the source than give you a number that might be outdated by the time you read this. Check the official <a href="https://www.nimindia.net/basic-mountaineering-course-bmc" target="_blank" style="color:var(--accent-lt);">Basic Mountaineering Course page</a> for the current criteria, or call the training desk directly at 7060 717 717.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">What does the ₹27,286 fee actually cover?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Stay, three meals a day, all training equipment, and instruction for the full 28 days — it's heavily subsidised, which is part of why NIM is accessible in the first place. What it doesn't cover: your travel to and from Uttarkashi, personal gear like boots and a warm cap, and any snacks or personal items you want along the way.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">How do I actually apply?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Everything is on the official NIM portal — you check the training calendar, pick a batch, and apply online. You'll also need a medical certificate signed and sealed by an authorised medical officer; don't cut corners on that part, incomplete medical forms are one of the most common reasons applications get delayed. Full details and the application link are in the NIM Info section above.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">What should I actually pack?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+       <p>Less than you think. Good high-ankle trekking boots are non-negotiable — they protect against twists on loose, wet, or icy terrain, and you'll hit all three. NIM provides the technical mountaineering gear and clothing, so most of what you carry is personal essentials, not gear.</p>
+      <p>I'm putting together a full packing list based on what I actually carried and what I wish I had — it'll be up on the site soon. Follow <a href="https://instagram.com/she_explores.wild" target="_blank" style="color:var(--accent-lt);">@she_explores.wild</a> and I'll post when it's live.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">I've never climbed before — can I still do this?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. Rock craft is where the course actively works through fear of heights and unfamiliarity with climbing, and the instructors have seen every version of "I've never done this before." Prior climbing experience helps, but it isn't required — showing up and trusting the process is what actually matters.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">Is there phone network up there?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>At the institute in Uttarkashi, yes. Once you move past Tela campsite toward base camp, no — there's no network at all. NIM provides satellite phones for genuine emergencies only. Tell the people who care about you before you go in; you'll both be fine.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">What's the food like?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Simple, warm, and better than I expected. Balanced meals with protein, carbs, and fibre, and at higher camps you get an aluminium mastin (food box) that's yours for the trip. There's a non-veg option most days alongside the vegetarian one. Nothing fancy — but after a day of climbing, it tastes like the best meal you've had all year.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
   <!-- CLOSING -->
   <div class="closing-quote reveal">
     <p>Grade arrives by post. My instructor said: "You will do well when you come for AMC." I am choosing to sit with that for now. The ice axe is on my wall. That is enough.</p>
@@ -1033,36 +1243,43 @@ body.intro-active { overflow: hidden; }
         <div class="iti-card-day"><span class="day-num">01</span><span class="day-word">Arrival</span></div>
         <div class="iti-card-main"><div class="iti-card-route">Reporting & Orientation</div><div class="iti-card-highlight">You arrive, find your bunk, set an alarm. Don't be three minutes late for the 5:15 fall-in. Learn from my experience.</div></div>
         <div class="iti-card-alt">NIM Uttarkashi</div><div class="iti-card-km">Days 1–2</div>
+        <span class="iti-status done">Completed</span>
       </div>
       <div class="iti-card">
         <div class="iti-card-day"><span class="day-num">02</span><span class="day-word">Foundation</span></div>
         <div class="iti-card-main"><div class="iti-card-route">Physical Conditioning, Theory & Knot Training</div><div class="iti-card-highlight">Early mornings, exercise, lectures, knot practice. The schedule begins breaking you into shape. Fresh lychees at breakfast.</div></div>
         <div class="iti-card-alt">NIM Campus</div><div class="iti-card-km">Days 3–7</div>
+        <span class="iti-status done">Completed</span>
       </div>
       <div class="iti-card iti-card-key">
         <div class="iti-card-day"><span class="day-num">03</span><span class="day-word">Rock</span></div>
         <div class="iti-card-main"><div class="iti-card-route">Rock Craft — Tekhla · 4,690 ft</div><div class="iti-card-highlight">Walk from NIM to Tekhla with full rucksack. Boulder climbing, long pitch, belaying, rappelling, jummaring. Rock reads differently from a wall gym.</div></div>
         <div class="iti-card-alt">Tekhla 4,690ft</div><div class="iti-card-km">Days 8–14</div>
+        <span class="iti-status highlight">Key Phase</span>
       </div>
       <div class="iti-card">
         <div class="iti-card-day"><span class="day-num">04</span><span class="day-word">Ascent</span></div>
         <div class="iti-card-main"><div class="iti-card-route">Tela Campsite → Gujjar Hut → Base Camp</div><div class="iti-card-highlight">The approach. Steep sections, loose mud, hailstorms possible. No network from Tela onwards. Satellite phone for emergencies.</div></div>
         <div class="iti-card-alt">Up to 12,300ft</div><div class="iti-card-km">Days 15–16</div>
+        <span class="iti-status done">Completed</span>
       </div>
       <div class="iti-card iti-card-key">
         <div class="iti-card-day"><span class="day-num">05</span><span class="day-word">Ice & Snow</span></div>
         <div class="iti-card-main"><div class="iti-card-route">Snow & Ice Craft — Base Camp · 12,300 ft</div><div class="iti-card-highlight">Altitude takes over from here. Crampons, ice axe, pitons on glacier. Crevasse crossing. Navigation exercise. Written exam for 100 marks.</div></div>
         <div class="iti-card-alt">BC 12,300ft</div><div class="iti-card-km">Days 17–24</div>
+        <span class="iti-status highlight">Key Phase</span>
       </div>
       <div class="iti-card iti-card-key">
         <div class="iti-card-day"><span class="day-num">06</span><span class="day-word">Summit</span></div>
         <div class="iti-card-main"><div class="iti-card-route">Height Gain Day · 15,100 ft · View of DKD2</div><div class="iti-card-highlight">The steepest day. The highest point. Gasping at altitude, loose mud, hail. And then the grassland opens and DKD2 appears at 18,600ft. Worth every step.</div></div>
         <div class="iti-card-alt">15,100ft</div><div class="iti-card-km">Day 25</div>
+        <span class="iti-status highlight">Key Phase</span>
       </div>
       <div class="iti-card">
         <div class="iti-card-day"><span class="day-num">07</span><span class="day-word">Graduation</span></div>
         <div class="iti-card-main"><div class="iti-card-route">Return to Institute & Graduation Ceremony</div><div class="iti-card-highlight">The ice axe. The badge of honour. The best rope announcement. Grade arrives by post within 2 months. The sunset on the last evening is unreal.</div></div>
         <div class="iti-card-alt">NIM Campus</div><div class="iti-card-km">Days 26–28</div>
+        <span class="iti-status done">Completed</span>
       </div>
     </div>
   </div>
@@ -1076,22 +1293,22 @@ body.intro-active { overflow: hidden; }
     <p class="hint">28 days. These are the ones I keep coming back to.</p>
 
     <div id="gal-grid-wrapper" class="photo-slots">
-      <figure class="photo-slot"><img src="images_bmc/NIMcampus.jpeg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
+      <figure class="photo-slot"><img src="images_bmc/groupphoto.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
       <figure class="photo-slot"><img src="images_bmc/sportclimbing.JPG" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
-      <figure class="photo-slot"><img src="images_bmc/basecamp.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
-      <figure class="photo-slot"><img src="images_bmc/buttercup.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
-      <figure class="photo-slot"><img src="images_bmc/dkd2.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
-      <figure class="photo-slot"><img src="images_bmc/evening_sunset.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
-      <figure class="photo-slot"><img src="images_bmc/ropeee.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
-      <figure class="photo-slot"><img src="images_bmc/unreal.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
       <figure class="photo-slot"><img src="images_bmc/ropeiceaxe.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
       <figure class="photo-slot"><img src="images_bmc/sunshine.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
       <figure class="photo-slot"><img src="images_bmc/rivercrossing.JPG" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
-      <figure class="photo-slot"><img src="images_bmc/night.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
-      <figure class="photo-slot"><img src="images_bmc/boots&flowers.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
-      <figure class="photo-slot"><img src="images_bmc/nonveg.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
-      <figure class="photo-slot"><img src="images_bmc/backbend.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
+      <figure class="photo-slot"><img src="images_bmc/dkd2.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
+      <figure class="photo-slot"><img src="images_bmc/buttercup.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
+      <figure class="photo-slot"><img src="images_bmc/basecamp.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
+      <figure class="photo-slot"><img src="images_bmc/ropeee.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
       <figure class="photo-slot"><img src="images_bmc/hailstorms.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
+      <figure class="photo-slot"><img src="images_bmc/unreal.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
+      <figure class="photo-slot"><img src="images_bmc/boots&flowers.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
+      <figure class="photo-slot"><img src="images_bmc/backbend.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
+      <figure class="photo-slot"><img src="images_bmc/night.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
+      <figure class="photo-slot"><img src="images_bmc/nonveg.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
+      <figure class="photo-slot"><img src="images_bmc/evening_sunset.jpg" alt="" onerror="this.style.display='none'" loading="lazy" /></figure>
 
     </div>
 
@@ -1106,11 +1323,28 @@ body.intro-active { overflow: hidden; }
         <img src="images_bmc/nirmala.jpg" alt="Nirmala — She Explores" loading="lazy" onerror="this.style.display='none'" />
       </div>
       <div class="author-text">
-        <span class="section-eyebrow">About the Author</span>
-        <h2>GETTING LOST TO <em>FIND</em> MYSELF</h2>
-        <p>Nirmala is a solo female trekker and writer from Bengaluru who goes to the mountains not for the view, but for what the mountains do to the person who shows up. She runs She Explores — a quiet corner of the internet for women who want to go somewhere real.</p>
-        <p style="margin-top:1rem;">BMC wasn't a bucket list tick. It was a question she had been asking herself for years. 28 days at NIM, Rope 9, and a graduation ice axe on her wall later — she's still understanding the answer.</p>
-        <div class="treks-done">
+  <span class="section-eyebrow">About the Author</span>
+  <h2 style="font-size:clamp(1.8rem,3.2vw,2.6rem);margin-bottom:1.2rem;">GETTING LOST TO <em>FIND</em> MYSELF</h2>
+  <p>Nirmala is a solo female trekker and writer from Bengaluru who goes to the mountains not for the view, but for what the mountains do to the person who shows up.</p>
+  <p>She runs <strong style="color:var(--frost);font-weight:500;">She Explores</strong> — a quiet corner of the internet for women who want to go somewhere real. Not curated. Not filtered. Just honest accounts of what it actually costs, and gives back, to leave the city behind.</p>
+  <p>BMC wasn't a bucket list tick. It was a question she had been carrying for years, waiting for the right season to ask it properly. Rope 9. Best Rope. A graduation ice axe now hanging on her wall.</p>
+
+  <div style="display:flex;gap:2rem;margin-top:1.8rem;padding-top:1.6rem;border-top:1px solid var(--rule);">
+    <div>
+      <div style="font-family:var(--font-display);font-size:2rem;color:var(--accent);line-height:1;">5</div>
+      <div style="font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;">Treks &amp; Courses</div>
+    </div>
+    <div>
+      <div style="font-family:var(--font-display);font-size:2rem;color:var(--accent);line-height:1;">🏆</div>
+      <div style="font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;">Best Rope, BMC 293</div>
+    </div>
+    <div>
+      <div style="font-family:var(--font-display);font-size:2rem;color:var(--accent);line-height:1;">18.6k</div>
+      <div style="font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;">Highest Peak Sighted (ft)</div>
+    </div>
+  </div>
+
+  <div class="treks-done">
           <span class="treks-label">Treks & Courses</span>
           <div class="trek-tags">
             <span class="trek-tag current">NIM BMC 293 · Rope 9 🏆</span>
@@ -1152,8 +1386,12 @@ body.intro-active { overflow: hidden; }
 <script>
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.07 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}, { threshold: 0.07 });
+
+document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 0.12}s`;
+    observer.observe(el);
+});
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 55); });
   const hamburger = document.getElementById('hamburger');
@@ -1171,31 +1409,34 @@ body.intro-active { overflow: hidden; }
   <button class="lb-close" id="lb-close">×</button>
 </div>
   <div class="lb-img-area">
-        <div class="lb-bg-blur" id="lb-bg"></div> 
+        <div class="lb-bg-blur" id="lb-bg"></div>
         <button class="lb-arrow left" id="lb-prev">‹</button>
         <img id="lb-img" src="" alt="">
         <button class="lb-arrow right" id="lb-next">›</button>
       </div>
       <div class="lb-bottom"><div class="lb-dots" id="lb-dots"><p class="lb-caption" id="lb-caption"></p></div></div>
-      
+
 <script>
   const photos = [
-    { src:"images_bmc/NIMcampus.jpeg", caption:"The campus at 5am. Mist, chai, and the sound of everyone figuring out what they signed up for." },
-    { src:"images_bmc/sportclimbing.JPG", caption:"sport climbing session at the campus,The holds are different when they're real." },
-    { src:"images_bmc/basecamp.jpg", caption:"Base camp at 12,300ft. The views are breathtaking and feels unreal." },
-    { src:"images_bmc/buttercup.jpg", caption:"Buttercups, a carefree dog, and snow-capped mountains—my kind of wealth." },
-    { src:"images_bmc/dkd2.jpg", caption:"DKD2 from the grassland on height gain day. 18,600ft. You look at it with loving eyes." },
-    { src:"images_bmc/evening_sunset.jpg", caption:"The last evening sky. Orange, then pink. The mountains said goodbye properly." },
-    { src:"images_bmc/ropeee.jpeg", caption:"Rope 9. The best rope. Every one of them earned it." },
-    { src:"images_bmc/unreal.jpg", caption:"Sunrise over the mountains. The sky painted in hues of pink and orange. Simply unreal." },
-    { src:"images_bmc/ropeiceaxe.jpg", caption:"Graduation day. The rope and ice axe. Earned, not given." },
-    { src:"images_bmc/sunshine.jpg", caption:"Sun rising early in the morning with snow-peaked mountains and the orange sky feels like magic." },
-    { src:"images_bmc/rivercrossing.JPG", caption:"River crossing session. Cold water, strong currents, and the thrill of adventure." },
-    { src:"images_bmc/night.jpg", caption:"Night at the base camp. Stars, cold air, and the quiet of the mountains." },
-    { src:"images_bmc/boots&flowers.jpg", caption:"Boots and flowers. The contrast of rugged and delicate." },
-    { src:"images_bmc/nonveg.jpg", caption:"Meal feast after a long trek. Simple joys." },
-    { src:"images_bmc/backbend.jpg", caption:"Stretches look like this at 12,300ft." },
-    { src:"images_bmc/hailstorms.jpg", caption:"Hailstorms at the camp. Nature's unpredictability." },
+   { src:"images_bmc/groupphoto.jpg", caption:"Summit crew >>" },
+{ src:"images_bmc/sportclimbing.JPG", caption:"sport climbing session at the campus,The holds are different when they're real." },
+{ src:"images_bmc/ropeiceaxe.jpg", caption:"Graduation day. The rope and ice axe. Earned, not given." },
+{ src:"images_bmc/sunshine.jpg", caption:"Sun rising early in the morning with snow-peaked mountains and the orange sky feels like magic." },
+
+{ src:"images_bmc/rivercrossing.JPG", caption:"River crossing session. Cold water, strong currents, and the thrill of adventure." },
+{ src:"images_bmc/dkd2.jpg", caption:"DKD2 from the grassland on height gain day. 18,600ft. You look at it with loving eyes." },
+{ src:"images_bmc/buttercup.jpg", caption:"Buttercups, a carefree dog, and snow-capped mountains—my kind of wealth." },
+{ src:"images_bmc/basecamp.jpg", caption:"Base camp at 12,300ft. The views are breathtaking and feels unreal." },
+
+{ src:"images_bmc/ropeee.jpeg", caption:"Rope 9. The best rope. Every one of them earned it." },
+{ src:"images_bmc/hailstorms.jpg", caption:"Hailstorms at the camp. Nature's unpredictability." },
+{ src:"images_bmc/boots&flowers.jpg", caption:"Boots and flowers. The contrast of rugged and delicate." },
+{ src:"images_bmc/unreal.jpg", caption:"Sunrise over the mountains. The sky painted in hues of pink and orange. Simply unreal." },
+
+{ src:"images_bmc/backbend.jpg", caption:"Stretches look like this at 12,300ft." },
+{ src:"images_bmc/night.jpg", caption:"Night at the base camp. Stars, cold air, and the quiet of the mountains." },
+{ src:"images_bmc/nonveg.jpg", caption:"Meal feast after a long trek. Simple joys." },
+{ src:"images_bmc/evening_sunset.jpg", caption:"The last evening sky. Orange, then pink. The mountains said goodbye properly." },
   ];
     window.addEventListener("load", function () {
     const intro = document.getElementById("intro");
@@ -1245,7 +1486,7 @@ body.intro-active { overflow: hidden; }
 function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow=''; }
   function goTo(i) { current=i; updateLightbox(); }
   function updateLightbox() {
-    document.getElementById('lb-bg').style.backgroundImage = "url('" + photos[current].src + "')"; 
+    document.getElementById('lb-bg').style.backgroundImage = "url('" + photos[current].src + "')";
     lbImg.style.opacity=0;
     setTimeout(function() { lbImg.src=photos[current].src; lbImg.alt=photos[current].caption; lbCaption.textContent=photos[current].caption; lbCounter.textContent=(current+1)+' / '+photos.length; lbImg.style.opacity=1; },150);
     document.querySelectorAll('.lb-dot').forEach(function(d,i){ d.classList.toggle('active',i===current); });
@@ -1291,7 +1532,36 @@ function closeLightbox() { lightbox.classList.remove('open'); document.body.styl
       btt.classList.remove('visible');
     }
   }, { passive: true });
+  document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
 
+/*
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'F12') e.preventDefault();
+  if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) e.preventDefault();
+  if (e.ctrlKey && e.key === 'u') e.preventDefault();
+  if (e.ctrlKey && e.key === 's') e.preventDefault();
+});
+*/
+
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+
+    document.querySelectorAll('.faq-item.open').forEach(openItem => {
+      openItem.classList.remove('open');
+      openItem.querySelector('.faq-answer').style.maxHeight = null;
+    });
+
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
 
 
 </script>
