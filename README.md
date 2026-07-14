@@ -1,2 +1,1 @@
-# BMC
-Basic Mountaineering Course
+
