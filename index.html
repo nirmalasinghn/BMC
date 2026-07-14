@@ -53,11 +53,11 @@
     .hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity:0; }
     .hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
-    .mobile-menu { position:fixed; inset:0; background:rgba(12,12,10,0.98); z-index:190; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2rem; opacity:0; pointer-events:none; transition:opacity .35s; }
+    .mobile-menu { position:fixed; inset:0; background:rgba(12,12,10,0.98); z-index:190; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2rem; opacity:0; pointer-events:none; transition:opacity .35s; overflow-y:auto; padding: 2rem 0; }
     .mobile-menu.open { opacity:1; pointer-events:all; }
     .mobile-menu ul { list-style:none; text-align:center; }
-    .mobile-menu li { margin-bottom:1.8rem; }
-    .mobile-menu a { font-family:var(--font-display); font-size:3.5rem; letter-spacing:0.08em; color:var(--text); transition:color .3s; }
+    .mobile-menu li { margin-bottom:1.1rem; }
+    .mobile-menu a { font-family:var(--font-display); font-size:clamp(2rem,8vw,3rem); letter-spacing:0.08em; color:var(--text); transition:color .3s; }
     .mobile-menu a:hover { color:var(--accent); }
     .mobile-menu-footer { font-size:0.65rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); font-weight:400; }
 
@@ -113,7 +113,7 @@
 }
     .hero-title { font-family:var(--font-display); font-size:clamp(3rem,6vw,6.5rem); font-weight:400; line-height:0.9; letter-spacing:0.02em; color:var(--text); margin-bottom:1.4rem; text-transform:uppercase; }
     .hero-title .accent { color:var(--accent); }
-    .hero-sub { font-family:var(--font-body); font-size:clamp(0.9rem,1.6vw,1.15rem); font-weight:300; font-style:italic; color:rgba(240,237,230,.5); max-width:520px; line-height:1.6; margin-bottom:2.4rem; letter-spacing:0.02em; }
+    .hero-sub { font-family:var(--font-body); font-size:clamp(0.9rem,1.6vw,1.15rem); font-weight:300; font-style:italic; color:rgb(255, 255, 255); max-width:520px; line-height:1.6; margin-bottom:2.4rem; letter-spacing:0.02em; text-shadow: 0 2px 12px rgba(0,0,0,0.55); }
     .hero-meta { display:flex; gap:.8rem; flex-wrap:wrap; }
     .meta-pill { font-size:.68rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; padding:.45em 1em; border:1px solid rgba(201,75,30,.35); background:rgba(201,75,30,.07); color:var(--frost); }
 
@@ -218,7 +218,7 @@
     .iti-subtitle { font-size:.85rem; color:var(--muted); margin-bottom:3rem; margin-top:-.6rem; }
     .iti-header { display:grid; grid-template-columns:80px 1fr 110px 80px; gap:1rem; padding:.9rem 1.4rem; font-size:.6rem; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--rule); }
     .iti-cards { display:flex; flex-direction:column; }
-    .iti-card { display:grid; grid-template-columns:80px 1fr 110px 80px; gap:1rem; padding:1.6rem 1.4rem; border-bottom:1px solid var(--border); transition:background .3s; }
+    .iti-card { display:grid; grid-template-columns:80px 1fr 110px 80px; gap:1rem; padding:1.6rem 1.4rem 2rem; border-bottom:1px solid var(--border); transition:background .3s; }
     .iti-card:hover { background:rgba(255,255,255,.02); }
     .iti-card-day { display:flex; flex-direction:column; gap:.15rem; }
     .day-num { font-family:var(--font-display); font-size:1.8rem; font-weight:400; letter-spacing:0.04em; color:var(--text); line-height:1; }
@@ -240,11 +240,7 @@
   margin-top: 0.5rem;
   white-space: nowrap;
 }
-.iti-status.done {
-  background: rgba(122,138,90,0.1);
-  color: #9fb377;
-  border: 1px solid rgba(122,138,90,0.25);
-}
+
 .iti-status.highlight {
   background: rgba(201,75,30,0.12);
   color: var(--accent-lt);
@@ -293,8 +289,11 @@
   position:relative;
   z-index:1;
 }
-    .lb-arrow { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.07); border:none; color:var(--text); font-size:20px; padding:10px 14px; cursor:pointer; border-radius:2px; transition:background .2s; }
-    .lb-arrow:hover { background:var(--accent); }
+.lb-arrow { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.07); border:none; color:var(--text); font-size:20px; padding:10px 14px; cursor:pointer; border-radius:2px; transition:background .2s; z-index:5; -webkit-tap-highlight-color: transparent; outline: none; }
+.lb-arrow:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (hover: hover) {
+  .lb-arrow:hover { background:var(--accent); }
+}
     .lb-arrow.left { left:8px; }
     .lb-arrow.right { right:8px; }
     .lb-bottom {
@@ -363,8 +362,10 @@
       .lb-img-area img { max-height: calc(100vh - 110px); }
       .lb-top { padding: 0.9rem 1.2rem; }
       .lb-bottom { padding: 0.6rem 1.2rem 0.9rem; }
+      .lb-arrow { padding: 14px 16px; font-size: 22px; }
     }
-    .insta-block { padding:5rem 0; text-align:center; border-top:1px solid var(--rule); }
+    .insta-block { padding: 5rem 0; text-align: center; border-top: 1px solid var(--rule); }
+    .author-section + .insta-block { padding-top: 2rem; }
     .insta-block p { max-width:480px; margin:0 auto 2.2rem; }
     .insta-block h2 { font-size:clamp(2rem,4.5vw,3.2rem); margin-bottom:1rem; }
     .insta-cta { display:inline-block; font-size:.78rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; padding:.9em 2em; border:1px solid var(--accent); color:var(--accent-lt); transition:all .3s; }
@@ -613,7 +614,7 @@ img {
   <div class="hero-content">
     <div class="hero-tag">BMC 293 Ladies Batch · Nehru Institute of Mountaineering · Uttarkashi · June 2026</div>
     <h1 class="hero-title">THE MOUNTAIN<br>DOESN'T<br><span class="accent">DIFFERENTIATE.</span></h1>
-    <p class="hero-sub">The mountain doesn't care who you are. It just asks what you're made of.<br><span style="opacity:0.6;font-size:0.9em;">I came back and couldn't explain it. This is my attempt.</span></p>
+    <p class="hero-sub">The mountain doesn't care who you are. It just asks what you're made of.<br><span style="opacity:0.8;font-size:0.9em;">I came back and couldn't explain it. This is my attempt.</span></p>
     <div class="hero-meta">
       <span class="meta-pill">28 Days</span>
       <span class="meta-pill">Uttarkashi, Uttarakhand</span>
@@ -1020,7 +1021,7 @@ img {
         <div class="phase-sub">The ice axe. The badge of honour.</div>
       </div>
   <div class="img-float-left">
-  <img src="images_bmc/graduation.jpg" alt="Graduation day NIM" style="width:100%;height:auto;object-fit:contain;" onerror="this.style.display='none'" />
+  <img src="images_bmc/graduation.jpg" alt="Graduation day NIM" style="width:100%;height:auto;object-fit:contain;filter:saturate(1.15) contrast(1.08) brightness(1.04);" onerror="this.style.display='none'" />
   <div class="img-caption" style="padding:.6rem 0;font-size:.7rem;">Earned. Not given.</div>
 </div>
 
@@ -1243,43 +1244,43 @@ img {
         <div class="iti-card-day"><span class="day-num">01</span><span class="day-word">Arrival</span></div>
         <div class="iti-card-main"><div class="iti-card-route">Reporting & Orientation</div><div class="iti-card-highlight">You arrive, find your bunk, set an alarm. Don't be three minutes late for the 5:15 fall-in. Learn from my experience.</div></div>
         <div class="iti-card-alt">NIM Uttarkashi</div><div class="iti-card-km">Days 1–2</div>
-        <span class="iti-status done">Completed</span>
+         
       </div>
       <div class="iti-card">
         <div class="iti-card-day"><span class="day-num">02</span><span class="day-word">Foundation</span></div>
         <div class="iti-card-main"><div class="iti-card-route">Physical Conditioning, Theory & Knot Training</div><div class="iti-card-highlight">Early mornings, exercise, lectures, knot practice. The schedule begins breaking you into shape. Fresh lychees at breakfast.</div></div>
         <div class="iti-card-alt">NIM Campus</div><div class="iti-card-km">Days 3–7</div>
-        <span class="iti-status done">Completed</span>
+         
       </div>
       <div class="iti-card iti-card-key">
         <div class="iti-card-day"><span class="day-num">03</span><span class="day-word">Rock</span></div>
         <div class="iti-card-main"><div class="iti-card-route">Rock Craft — Tekhla · 4,690 ft</div><div class="iti-card-highlight">Walk from NIM to Tekhla with full rucksack. Boulder climbing, long pitch, belaying, rappelling, jummaring. Rock reads differently from a wall gym.</div></div>
-        <div class="iti-card-alt">Tekhla 4,690ft</div><div class="iti-card-km">Days 8–14</div>
-        <span class="iti-status highlight">Key Phase</span>
+        <div class="iti-card-alt">Tekhla 4,690ft</div><div class="iti-card-km">Days 8–14 <span class="iti-status highlight">Key Phase</span></div>
+        
       </div>
       <div class="iti-card">
         <div class="iti-card-day"><span class="day-num">04</span><span class="day-word">Ascent</span></div>
         <div class="iti-card-main"><div class="iti-card-route">Tela Campsite → Gujjar Hut → Base Camp</div><div class="iti-card-highlight">The approach. Steep sections, loose mud, hailstorms possible. No network from Tela onwards. Satellite phone for emergencies.</div></div>
         <div class="iti-card-alt">Up to 12,300ft</div><div class="iti-card-km">Days 15–16</div>
-        <span class="iti-status done">Completed</span>
+         
       </div>
       <div class="iti-card iti-card-key">
         <div class="iti-card-day"><span class="day-num">05</span><span class="day-word">Ice & Snow</span></div>
         <div class="iti-card-main"><div class="iti-card-route">Snow & Ice Craft — Base Camp · 12,300 ft</div><div class="iti-card-highlight">Altitude takes over from here. Crampons, ice axe, pitons on glacier. Crevasse crossing. Navigation exercise. Written exam for 100 marks.</div></div>
-        <div class="iti-card-alt">BC 12,300ft</div><div class="iti-card-km">Days 17–24</div>
-        <span class="iti-status highlight">Key Phase</span>
+        <div class="iti-card-alt">BC 12,300ft</div><div class="iti-card-km">Days 17–24 <span class="iti-status highlight">Key Phase</span></div>
+        
       </div>
       <div class="iti-card iti-card-key">
         <div class="iti-card-day"><span class="day-num">06</span><span class="day-word">Summit</span></div>
         <div class="iti-card-main"><div class="iti-card-route">Height Gain Day · 15,100 ft · View of DKD2</div><div class="iti-card-highlight">The steepest day. The highest point. Gasping at altitude, loose mud, hail. And then the grassland opens and DKD2 appears at 18,600ft. Worth every step.</div></div>
         <div class="iti-card-alt">15,100ft</div><div class="iti-card-km">Day 25</div>
-        <span class="iti-status highlight">Key Phase</span>
+        <div class="iti-card-km">Day 25 <span class="iti-status highlight">Key Phase</span></div>
       </div>
       <div class="iti-card">
         <div class="iti-card-day"><span class="day-num">07</span><span class="day-word">Graduation</span></div>
         <div class="iti-card-main"><div class="iti-card-route">Return to Institute & Graduation Ceremony</div><div class="iti-card-highlight">The ice axe. The badge of honour. The best rope announcement. Grade arrives by post within 2 months. The sunset on the last evening is unreal.</div></div>
         <div class="iti-card-alt">NIM Campus</div><div class="iti-card-km">Days 26–28</div>
-        <span class="iti-status done">Completed</span>
+         
       </div>
     </div>
   </div>
@@ -1364,7 +1365,9 @@ img {
       </div>
     </div>
   </div>
-   <section class="insta-block reveal">
+</section>
+
+<section class="insta-block reveal">
   <div class="container">
     <span class="section-eyebrow">Beyond This Page</span>
     <h2>SEE THE FRAMES I <em>DIDN'T</em> POST</h2>
@@ -1372,7 +1375,6 @@ img {
     <a href="https://instagram.com/she_explores.wild" target="_blank" class="insta-cta">@she_explores.wild →</a>
   </div>
   </section>
-</section>
 
 <footer>
     <span class="footer-brand">THE MOUNTAIN DOESN'T DIFFERENTIATE.</span>
